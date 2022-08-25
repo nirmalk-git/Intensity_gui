@@ -27,7 +27,7 @@ first_column = [
     [sg.Text("Enter the wavelength (nm)", ), sg.InputText(key='wave', size=(10, 0))],
     # for displaying the results.
     [sg.Text("Energy of one photon = "), sg.Text("", size=(10, 0), key="Ph_E")],
-    [sg.Button("photon energy")],
+    [sg.Button("Calculate photon energy")],
     # QE at wavelength
     [sg.Text("Enter QE at input wavelength"), sg.InputText(key='qe', size=(10, 0))],
     # Pixel size
@@ -43,12 +43,13 @@ first_column = [
     # for displaying the results.
     [sg.Text("Flux at saturation for HG"), sg.Text("", size=(10, 0), key="hg_flux")],
     # Cancel and OK
-    [sg.Button("Calculate flux"), sg.Button("Cancel")],
+    [sg.Button("Calculate flux")],
     # PTC measurement points
     [sg.Text("PTC measurement points"), sg.InputText(key='N', size=(10, 0))],
     [sg.Text("LG minimum flux = "), sg.Text("", size=(10, 0), key="lg_min_flux")],
     [sg.Text("HG minimum flux = "), sg.Text("", size=(10, 0), key="hg_min_flux")],
-    [sg.Button("Calculate min intensity")],
+    [sg.Button("Calculate min flux")],
+    [sg.Button("Cancel")],
 ]
 
 
@@ -102,7 +103,7 @@ while True:
         flux_h = calc_flux(wave, fwc_h, Pixel_area, time)
         window['lg_flux'].update(value=flux_l)
         window['hg_flux'].update(value=flux_h)
-    if event == 'Calculate min intensity':
+    if event == 'Calculate min flux':
         N = float(values['N'])
         lg_min_flux = flux_l/N
         hg_min_flux = flux_h/N
